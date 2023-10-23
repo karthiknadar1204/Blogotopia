@@ -15,12 +15,13 @@ const Header = () => {
         });
         const userInfo = response.data;
         setUserInfo(userInfo)
-      } catch (error) {
+      } catch (error) { 
         console.error(error);
       }
     };
     fetchData();
   }, []);
+  console.log(userInfo);
 
   const logout=()=>{
     axios.post('http://localhost:4000/logout',{
@@ -28,7 +29,7 @@ const Header = () => {
     })
     setUserInfo(null);
   }
-  const username=userInfo?.username;
+  const username=userInfo?.Username;
 
   return (
     <header>

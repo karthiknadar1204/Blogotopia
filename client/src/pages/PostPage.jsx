@@ -10,7 +10,7 @@ const PostPage = () => {
   const {userInfo}=useContext(UserContext)
   const [postInfo, setPostInfo] = useState('');
   const { id } = useParams();
-  console.log(id);
+  console.log(id); 
 
   useEffect(() => {
     axios.get(`http://localhost:4000/post/${id}`).then((response) => {
@@ -31,8 +31,17 @@ const PostPage = () => {
     <div className='post-page'>
       <h1>{postInfo.title}</h1>
       <time>{formatISO9075(new Date(postInfo.createdAt))}</time>
+      <div className="author">
+        {postInfo.author.Username}
+      </div>
       <div className="edit-row">
-        <Link className='edit-btn' to={`/edit/${postInfo._id}`}>Edit this post</Link>
+        {
+          userInfo.id===postInfo.author._id && (
+            <div>
+              <Link className='edit-btn' to={`/edit/${postInfo._id}`}>Edit this post</Link>
+            </div>
+          )
+        }
       </div>
       <div className="image">
         <img src={newCoverSrc} alt="image" />

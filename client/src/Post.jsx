@@ -8,6 +8,7 @@ const Post = ({_id,title,summary,cover,content,createdAt,author}) => {
 
   // Construct the new image source with only the file name
   const newCoverSrc = `http://localhost:4000/uploads/${fileName}`;
+  console.log(author);
   return (
     <div>
       <div className="post">
@@ -17,7 +18,7 @@ const Post = ({_id,title,summary,cover,content,createdAt,author}) => {
         </div>
         </Link>
         <div className="contents">
-        <Link to={`/post/${_id}`} >
+        <Link to={`/post/${_id}`} > 
           <h2>{title}</h2>
         </Link>  
           <p className="info">

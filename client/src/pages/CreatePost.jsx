@@ -41,7 +41,7 @@ const CreatePost = () => {
         },
           withCredentials: true,
       });   
-      if (response.status === 200) {
+      if (response.status === 200) { 
         navigate('/');
       }
       console.log(await response.data);

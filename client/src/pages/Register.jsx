@@ -5,7 +5,7 @@ const Register = () => {
   const [Username, setUsername] = useState(""); 
   const [password, setPassword] = useState("");
   const [error, setError] = useState(null);
-  const [success, setSuccess] = useState(false);
+  const [success, setSuccess] = useState(false); 
 
   const register = async (e) => {
     e.preventDefault();
@@ -15,7 +15,7 @@ const Register = () => {
         password
       },{
           headers: {
-            'Content-Type': 'application/json' // Specify the content type in headers
+            'Content-Type': 'application/json'
           }
       })
       alert('successful')
