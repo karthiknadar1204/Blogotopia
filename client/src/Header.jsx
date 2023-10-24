@@ -37,11 +37,13 @@ const Header = () => {
         BlogoTopia
       </Link>
       <nav>
-        {userInfo ? (
+        {userInfo ? ( 
           <>
-          <span>Hello,{username}</span>
             <Link to="/create">Create new post</Link>
-            <button onClick={logout}>Logout</button>
+            <button onClick={logout} className='logout' >Logout</button>
+            <div className="user-profile">
+              <span className='username' >Hello {username}</span>
+            </div>
           </>
         ) : (
           <>

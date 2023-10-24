@@ -3,6 +3,14 @@ import {formatISO9075} from 'date-fns';
 import {Link} from 'react-router-dom'
 
 const Post = ({_id,title,summary,cover,content,createdAt,author}) => {
+  function limitText(text, wordLimit) {
+    const words = text.split(' ');
+    if (words.length > wordLimit) {
+      return words.slice(0, wordLimit).join(' ') + '...';
+    }
+    return text;
+  }
+  
   const parts = cover.split('/');
   const fileName = parts[parts.length - 1];
 
@@ -10,7 +18,7 @@ const Post = ({_id,title,summary,cover,content,createdAt,author}) => {
   const newCoverSrc = `http://localhost:4000/uploads/${fileName}`;
   console.log(author);
   return (
-    <div>
+    <>
       <div className="post">
         <Link to={`/post/${_id}`} >
           <div className="image">
@@ -30,11 +38,11 @@ const Post = ({_id,title,summary,cover,content,createdAt,author}) => {
             </time>
           </p>
           <p className="summary">
-            {summary}
-          </p>
+  {limitText(summary, 50)}
+</p>
         </div>
       </div>
-    </div>
+    </>
   );
 };
 
