@@ -37,7 +37,7 @@ const Login = () => {
   };
 
   return (
-    <div>
+    <div className="container">
       <form className="login" onSubmit={login}>
         <h1>Login</h1>
         {error && <p className="error">{error}</p>}

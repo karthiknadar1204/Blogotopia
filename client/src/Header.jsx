@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link} from 'react-router-dom';
 import axios from 'axios';
 import { useContext } from 'react';
 import { UserContext } from './UserContext';
 
 const Header = () => {
-  const {setUserInfo,userInfo}=useContext(UserContext)
+  const { setUserInfo, userInfo } = useContext(UserContext);
+  const [loading, setLoading] = useState(true); // Add a loading state
 
   useEffect(() => {
     const fetchData = async () => {
@@ -14,22 +15,24 @@ const Header = () => {
           withCredentials: true,
         });
         const userInfo = response.data;
-        setUserInfo(userInfo)
-      } catch (error) { 
+        setUserInfo(userInfo);
+        setLoading(false); // Set loading to false when data is received
+      } catch (error) {
         console.error(error);
       }
     };
     fetchData();
   }, []);
+
   console.log(userInfo);
 
-  const logout=()=>{
-    axios.post('http://localhost:4000/logout',{
-      withCredentials:true
-    })
+  const logout = () => {
+    axios.post('http://localhost:4000/logout', {
+      withCredentials: true,
+    });
     setUserInfo(null);
-  }
-  const username=userInfo?.Username;
+  };
+  const username = userInfo?.Username;
 
   return (
     <header>
@@ -37,18 +40,26 @@ const Header = () => {
         BlogoTopia
       </Link>
       <nav>
-        {userInfo ? ( 
-          <>
-            <Link to="/create">Create new post</Link>
-            <button onClick={logout} className='logout' >Logout</button>
-            <div className="user-profile">
-              <span className='username' >Hello {username}</span>
-            </div>
-          </>
+        {loading ? ( // Show a loading indicator while data is being fetched
+          <p>Loading...</p>
         ) : (
           <>
-            <Link to="/login">Login</Link>
-            <Link to="/register">Register</Link>
+            {userInfo ? (
+              <>
+                <Link to="/create">Create new post</Link>
+                <button onClick={logout} className='logout'>Logout</button>
+                <div className="user-profile">
+                  <Link to={`/profile/${userInfo.id}`}>
+                    <span className='username'>Hello {username}</span>
+                  </Link>
+                </div>
+              </>
+            ) : (
+              <>
+                <Link to="/login">Login</Link>
+                <Link to="/register">Register</Link>
+              </>
+            )}
           </>
         )}
       </nav>

@@ -166,6 +166,12 @@ app.use('/uploads', express.static(__dirname + '/uploads'));
     });
   });
 
+  app.get('/profileinfo',async(req,res)=>{
+    const {id}=req.params;
+    const postDoc=await Post.findById(id);
+    res.json(postDoc);
+  })
+
   
 app.listen(4000, () => {
     console.log('Server is running on port 4001');
