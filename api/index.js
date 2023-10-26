@@ -126,7 +126,6 @@ app.use('/uploads', express.static(__dirname + '/uploads'));
   });
   
   app.get('/post',async (req,res)=>{
-
     const posts=await(Post.find().populate('author',['Username']).sort({createdAt:-1}).limit(20))
     res.json(posts);
   })
@@ -166,11 +165,17 @@ app.use('/uploads', express.static(__dirname + '/uploads'));
     });
   });
 
-  app.get('/profileinfo',async(req,res)=>{
-    const {id}=req.params;
-    const postDoc=await Post.findById(id);
-    res.json(postDoc);
-  })
+  app.get('/profileinfo/:id', async (req, res) => {
+    const { id } = req.params;
+    try {
+      const posts = await Post.find({ author: id });
+      res.json(posts);
+    } catch (error) {
+      console.error('Error fetching profile info:', error);
+      res.status(500).json({ error: 'An error occurred while fetching posts.' });
+    }
+  });
+  
 
   
 app.listen(4000, () => {
