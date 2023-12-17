@@ -36,9 +36,9 @@ header {
     border: 1px solid black;
     cursor: pointer;
   }
-  .username{
+  /* .username{
     margin: 0.8rem;
-  }
+  } */
   header a.logo {
     font-weight: bold;
     font-size: 2.7rem;

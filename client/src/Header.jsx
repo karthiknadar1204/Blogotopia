@@ -35,11 +35,11 @@ const Header = () => {
   const username = userInfo?.Username;
 
   return (
-    <header>
+    <header className='bg-red-800 flex' >
       <Link to="/" className="logo">
         BlogoTopia
       </Link>
-      <nav>
+      <nav >
         {loading ? ( // Show a loading indicator while data is being fetched
           <p>Loading...</p>
         ) : (
@@ -56,7 +56,7 @@ const Header = () => {
               </>
             ) : (
               <>
-                <Link to="/login">Login</Link>
+                <Link to="/login">Login</Link> 
                 <Link to="/register">Register</Link>
               </>
             )}

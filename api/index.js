@@ -84,12 +84,13 @@ app.use('/uploads', express.static(__dirname + '/uploads'));
 
   app.get('/profile',(req,res)=>{
     const {token}=req.cookies;
-    jwt.verify(token,secret,{},(err,info)=>{
-        if(err){
-            throw err;
-        }
-        res.json(info);
-    })
+    jwt.verify(token, secret, {}, (err, info) => {
+      if (err) {
+          return res.status(401).json({ message: 'Invalid token' });
+      }
+      res.json(info);
+  });
+  
   })
 
   app.post('/logout', (req,res) => {
