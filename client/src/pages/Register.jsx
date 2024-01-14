@@ -1,36 +1,35 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
 const Register = () => {
+  const navigate = useNavigate(); // Hook to navigate to different routes
   const [Username, setUsername] = useState(""); 
   const [password, setPassword] = useState("");
   const [error, setError] = useState(null);
-  const [success, setSuccess] = useState(false); 
+  const [success, setSuccess] = useState(false);
 
   const register = async (e) => {
     e.preventDefault();
     try {
-      await axios.post('http://localhost:4000/register',{
+      await axios.post('http://localhost:4000/register', {
         Username,
         password
-      },{
-          headers: {
-            'Content-Type': 'application/json'
-          }
-      })
-      alert('successful')
-      
+      }, {
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      });
+      setSuccess(true);
+      navigate('/login'); // Use navigate to redirect to the login page
     } catch (error) {
-      alert('Registration failed,Try again later');
-      
+      setError('Registration failed. Please try again.');
     }
   };
-  
-  
 
   return (
     <div>
-      <form className="register" onSubmit={register} >
+      <form className="register" onSubmit={register}>
         <h1>Register</h1>
         {error && <p className="error">{error}</p>}
         {success && <p className="success">Registration successful!</p>}
