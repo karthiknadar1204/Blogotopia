@@ -4,9 +4,10 @@ import axios from "axios";
 import { useContext } from "react";
 import { UserContext } from "./UserContext";
 
+
 const Header = () => {
   const { setUserInfo, userInfo } = useContext(UserContext);
-  const [loading, setLoading] = useState(true); // Add a loading state
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -16,7 +17,7 @@ const Header = () => {
         });
         const userInfo = response.data;
         setUserInfo(userInfo);
-        setLoading(false); // Set loading to false when data is received
+        setLoading(false);
       } catch (error) {
         console.error(error);
       }
@@ -24,14 +25,13 @@ const Header = () => {
     fetchData();
   }, []);
 
-  console.log(userInfo);
-
   const logout = () => {
     axios.post("http://localhost:4000/logout", {
       withCredentials: true,
     });
     setUserInfo(null);
   };
+
   const username = userInfo?.Username;
 
   return (
@@ -88,6 +88,7 @@ const Header = () => {
       <div className="h-2 from-lime-700 via-lime-200 to-lime-700  bg-gradient-to-r "></div>
       {/* <div className="absolute -z-1 gradient-bg"></div> */}
     </div>
+
   );
 };
 
