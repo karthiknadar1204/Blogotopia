@@ -1,12 +1,11 @@
-import React, { useEffect, useState } from 'react';
-import { Link} from 'react-router-dom';
+import React, { useEffect, useState, useContext } from 'react';
+import { Link } from 'react-router-dom';
 import axios from 'axios';
-import { useContext } from 'react';
 import { UserContext } from './UserContext';
 
 const Header = () => {
   const { setUserInfo, userInfo } = useContext(UserContext);
-  const [loading, setLoading] = useState(true); // Add a loading state
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -16,7 +15,7 @@ const Header = () => {
         });
         const userInfo = response.data;
         setUserInfo(userInfo);
-        setLoading(false); // Set loading to false when data is received
+        setLoading(false);
       } catch (error) {
         console.error(error);
       }
@@ -24,23 +23,22 @@ const Header = () => {
     fetchData();
   }, []);
 
-  console.log(userInfo);
-
   const logout = () => {
     axios.post('http://localhost:4000/logout', {
       withCredentials: true,
     });
     setUserInfo(null);
   };
+
   const username = userInfo?.Username;
 
   return (
-    <header className='bg-red-800 flex' >
+    <header className='bg-red-800 flex'>
       <Link to="/" className="logo">
         BlogoTopia
       </Link>
-      <nav >
-        {loading ? ( // Show a loading indicator while data is being fetched
+      <nav>
+        {loading ? (
           <p>Loading...</p>
         ) : (
           <>
@@ -56,8 +54,12 @@ const Header = () => {
               </>
             ) : (
               <>
-                <Link to="/login">Login</Link> 
-                <Link to="/register">Register</Link>
+                <Link to="/login">Login</Link>
+                {!loading && (
+                  <Link to="/register" className="register-btn">
+                    Register
+                  </Link>
+                )}
               </>
             )}
           </>
