@@ -39,7 +39,7 @@ const Header = () => {
       <header className="bg-black text-lime-500 text-2xl py-8 font-mono px-8 flex justify-between items-center">
         <div className="font-semibold text-[1.6rem]">
           <Link to="/" className="logo">
-            <p>{"<Script.js />"}</p>
+            <p>{"<Script.js/>"}</p>
           </Link>
         </div>
         <div className="hidden">
