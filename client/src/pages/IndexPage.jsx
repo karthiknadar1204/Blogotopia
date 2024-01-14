@@ -20,9 +20,16 @@ const IndexPage = () => {
   }, []);
 
   return (
-    <div className="bg-black">
+    <div className="gradient-bg py-8">
       {posts.length > 0 &&
-        posts.map((post) => <Post key={post.id} {...post} />)}
+        posts.map((post, index) => (
+          <Post
+            key={post.id}
+            {...post}
+            index={index}
+            // style={index % 2 === 1 ? { transform: "scaleX(-1)" } : {}}
+          />
+        ))}
     </div>
   );
 };
